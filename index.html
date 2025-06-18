@@ -25,10 +25,6 @@
       width: 100%;
       box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     }
-    h1, h3 {
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
     h1 {
       color: #fdb913;
       font-size: 2.4rem;
@@ -42,72 +38,15 @@
       margin-top: 20px;
       color: #003f87;
     }
-    input[type="text"],
-    input[type="email"],
-    input[type="number"],
-    input[type="date"],
-    input[type="tel"],
-    select {
+    input, select {
       width: 100%;
-      height: 48px; /* altura fixa para todos */
+      height: 48px;
       padding: 10px 12px;
       border: 2px solid #003f87;
       border-radius: 8px;
       font-size: 1rem;
       font-family: 'Nunito', sans-serif;
       color: #003f87;
-      box-sizing: border-box;
-      margin-bottom: 6px;
-      background: #fff;
-      appearance: none; /* Remove o estilo padrão do select no Chrome */
-      -webkit-appearance: none; /* Remove o estilo padrão do select no Safari */
-      -moz-appearance: none; /* Remove o estilo padrão do select no Firefox */
-      }
-    input:focus, select:focus {
-      border-color: #fdb913;
-      outline: none;
-    }
-    .radio-group {
-      margin-top: 10px;
-    }
-    .radio-group label {
-      font-weight: 400;
-      margin-right: 20px;
-      color: #003f87;
-      cursor: pointer;
-    }
-    .radio-group input[type="radio"] {
-      margin-right: 6px;
-      cursor: pointer;
-    }
-    .section {
-      display: none;
-      margin-top: 20px;
-      border-top: 2px solid #fdb913;
-      padding-top: 20px;
-    }
-    .section.active {
-      display: block;
-    }
-    .unidade-block {
-      margin-top: 30px;
-      padding: 20px;
-      background: #e6f0ff;
-      border-radius: 10px;
-      border: 2px solid #003f87;
-    }
-    .unidade-block strong {
-      color: #003f87;
-      font-size: 1.1rem;
-      display: block;
-      margin-bottom: 6px;
-    }
-    .unidade-block a {
-      color: #fdb913;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.95rem;
-      display: inline-block;
       margin-bottom: 12px;
     }
     button[type="submit"] {
@@ -126,164 +65,44 @@
     button[type="submit"]:hover {
       background-color: #e0a800;
     }
-    .input-group { margin-bottom: 18px; }
-    .input-group label { font-weight: 700; color: #003f87; display: block; margin-bottom: 6px; }
-    .input-group input, .input-group select { width: 100%; padding: 10px; border-radius: 8px; border: 2px solid #003f87; font-size: 1rem; font-family: 'Nunito', sans-serif; }
-    .input-group input:focus { border-color: #fdb913; outline: none; }
-    .input-group .complemento { font-weight: 400; color: #003f87; }
-    .required { color: #fdb913; margin-left: 2px; }
   </style>
-  <script>
-    function mostrarSecao() {
-      const maioridade = document.querySelector('input[name="maioridade"]:checked');
-      const secaoAluno = document.getElementById('secaoAluno');
-      const secaoResponsavel = document.getElementById('secaoResponsavel');
-      if (!maioridade) {
-        secaoAluno.classList.remove('active');
-        secaoResponsavel.classList.remove('active');
-        return;
-      }
-      if (maioridade.value === 'sim') {
-        secaoAluno.classList.add('active');
-        secaoResponsavel.classList.remove('active');
-      } else {
-        secaoAluno.classList.add('active');
-        secaoResponsavel.classList.add('active');
-      }
-    }
-
-    // Busca endereço pelo ViaCEP
-    function buscarEnderecoPorCEP() {
-      const cep = document.getElementById('cep_responsavel').value.replace(/\D/g, '');
-      if (cep.length !== 8) return;
-      fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        .then(response => response.json())
-        .then(data => {
-          if (!data.erro) {
-            document.getElementById('endereco_responsavel').value = data.logradouro || '';
-            document.getElementById('bairro_responsavel').value = data.bairro || '';
-            document.getElementById('cidade_responsavel').value = data.localidade || '';
-            document.getElementById('uf_responsavel').value = data.uf || '';
-          } else {
-            document.getElementById('endereco_responsavel').value = '';
-            document.getElementById('bairro_responsavel').value = '';
-            document.getElementById('cidade_responsavel').value = '';
-            document.getElementById('uf_responsavel').value = '';
-          }
-        });
-    }
-  </script>
 </head>
 <body>
-  <form action="URL_DO_SEU_FORMULARIO" method="post" autocomplete="off" novalidate>
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSdado7ZFYiEXvf0F8h623k-ObRA_u0PfYFgRHh2pefQrxeRgA/formResponse" method="POST" target="_blank">
     <h1>Ultra Volleyball - Matrícula</h1>
 
-    <label>O Aluno tem mais de 18 anos?</label>
-    <div class="radio-group">
-      <label><input type="radio" name="maioridade" value="sim" onclick="mostrarSecao()"> Sim</label>
-      <label><input type="radio" name="maioridade" value="nao" onclick="mostrarSecao()"> Não</label>
-    </div>
+    <label>Nome do Contratante</label>
+    <input type="text" name="entry.nome_contratante" required>
 
-    <div id="secaoAluno" class="section">
-      <h3>Dados do Aluno(a)</h3>
-      <label for="nome_aluno">Nome Completo:</label>
-      <input type="text" id="nome_aluno" name="nome_aluno" required>
+    <label>CPF</label>
+    <input type="text" name="entry.cpf_contratante" required>
 
-      <label for="cpf_aluno">CPF:</label>
-      <input type="text" id="cpf_aluno" name="cpf_aluno" required>
+    <label>RG</label>
+    <input type="text" name="entry.rg_contratante" required>
 
-      <label for="rg_aluno">RG:</label>
-      <input type="text" id="rg_aluno" name="rg_aluno" required>
+    <label>Data de Nascimento</label>
+    <input type="date" name="entry.nascimento_contratante" required>
 
-      <label for="idade_aluno">Idade:</label>
-      <input type="number" id="idade_aluno" name="idade_aluno" min="1" required>
+    <label>Endereço</label>
+    <input type="text" name="entry.endereco" required>
 
-      <label for="data_nasc_aluno">Data de Nascimento:</label>
-      <input type="date" id="data_nasc_aluno" name="data_nasc_aluno" required>
-    </div>
+    <label>CEP</label>
+    <input type="text" name="entry.cep" required>
 
-    <div id="secaoResponsavel" class="section">
-      <h3>Dados do Responsável Legal</h3>
-      <div class="input-group">
-        <label for="nome_responsavel">Nome Completo do Responsável <span class="required">*</span></label>
-        <input type="text" id="nome_responsavel" name="nome_responsavel" required>
-      </div>
-      <div class="input-group">
-        <label for="cpf_responsavel">CPF do Responsável <span class="required">*</span></label>
-        <input type="text" id="cpf_responsavel" name="cpf_responsavel" required>
-      </div>
-      <div class="input-group">
-        <label for="rg_responsavel">RG do Responsável <span class="required">*</span></label>
-        <input type="text" id="rg_responsavel" name="rg_responsavel" required>
-      </div>
-      <div class="input-group">
-        <label for="cep_responsavel">CEP <span class="required">*</span></label>
-        <input type="text" id="cep_responsavel" name="cep_responsavel" maxlength="9" pattern="\d{5}-?\d{3}" required onblur="buscarEnderecoPorCEP()" placeholder="00000-000">
-      </div>
-      <div class="input-group">
-        <label for="endereco_responsavel">Endereço <span class="required">*</span></label>
-        <input type="text" id="endereco_responsavel" name="endereco_responsavel" required>
-      </div>
-      <div class="input-group">
-        <label for="numero_responsavel">Número <span class="required">*</span></label>
-        <input type="text" id="numero_responsavel" name="numero_responsavel" required>
-      </div>
-      <div class="input-group">
-        <label for="complemento_responsavel" class="complemento">Complemento (opcional)</label>
-        <input type="text" id="complemento_responsavel" name="complemento_responsavel">
-      </div>
-      <div class="input-group">
-        <label for="bairro_responsavel">Bairro <span class="required">*</span></label>
-        <input type="text" id="bairro_responsavel" name="bairro_responsavel" required>
-      </div>
-      <div class="input-group">
-        <label for="cidade_responsavel">Cidade <span class="required">*</span></label>
-        <input type="text" id="cidade_responsavel" name="cidade_responsavel" required>
-      </div>
-      <div class="input-group">
-        <label for="uf_responsavel">UF <span class="required">*</span></label>
-        <input type="text" id="uf_responsavel" name="uf_responsavel" maxlength="2" required>
-      </div>
-      <div class="input-group">
-        <label for="telefone_responsavel">Telefone (WhatsApp) com DDD <span class="required">*</span></label>
-        <input type="tel" id="telefone_responsavel" name="telefone_responsavel" pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" placeholder="(11) 91234-5678" required>
-      </div>
-      <div class="input-group">
-        <label for="email_responsavel">E-mail <span class="required">*</span></label>
-        <input type="email" id="email_responsavel" name="email_responsavel" required>
-      </div>
-    </div>
+    <label>Telefone (Whatsapp)</label>
+    <input type="tel" name="entry.telefone" required>
 
-    <h3>Selecione o horário:</h3>
-    <div class="unidade-block">
-      <strong>UNIDADE TATUAPÉ</strong>
-      <a href="https://maps.app.goo.gl/TZ3ctxFooxBAo5t69" target="_blank" rel="noopener noreferrer">Rua Francisco Marengo, 475</a>
-      <select name="horario_tatuape" id="horario_tatuape">
-        <option value="">Selecione o horário</option>
-        <option value="tatuape_terca_18_20">Terça-feira - 18h às 20h - Categoria Misto - 14+</option>
-        <option value="tatuape_terca_20_22">Terça-feira - 20h às 22h - Categoria Misto - 14+</option>
-      </select>
-    </div>
-    <div class="unidade-block">
-      <strong>UNIDADE VILA MATILDE</strong>
-      <a href="https://maps.app.goo.gl/MV19K4dsCrJTT95r5" target="_blank" rel="noopener noreferrer">Rua Cel Bento José de Carvalho, 167</a>
-      <select name="horario_vmatilde" id="horario_vmatilde">
-        <option value="">Selecione o horário</option>
-        <option value="vmatilde_segunda_17_30_19_30">Segunda-feira - 17h30 às 19h30 - Masculino Avançado 16+</option>
-        <option value="vmatilde_terca_15_17">Terça-feira - 15h às 17h - Feminino Avançado 15+</option>
-        <option value="vmatilde_terca_17_19">Terça-feira - 17h às 19h - Feminino Iniciante/Intermediário 15+</option>
-        <option value="vmatilde_quarta_17_19">Quarta-feira - 17h às 19h - Masculino 13 a 17 Anos</option>
-        <option value="vmatilde_quinta_9_11">Quinta-feira - 9h às 11h - Infantil 07 a 12 Anos</option>
-        <option value="vmatilde_quinta_14_15">Quinta-feira - 14h às 15h - Infantil 07 a 12 Anos</option>
-        <option value="vmatilde_quinta_17_30_19_30">Quinta-feira - 17h30 às 19h30 - Misto Adulto</option>
-        <option value="vmatilde_sexta_9_10_30">Sexta-feira - 9h às 10h30 - Master Misto 50+</option>
-        <option value="vmatilde_sexta_14_16">Sexta-feira - 14h às 16h - Misto 14+</option>
-        <option value="vmatilde_sexta_16_18">Sexta-feira - 16h às 18h - Misto 14+</option>
-      </select>
-    </div>
+    <label>E-mail</label>
+    <input type="email" name="entry.email" required>
 
-    <label for="tamanho_camiseta">Tamanho da Camiseta do Aluno:</label>
-    <select name="tamanho_camiseta" id="tamanho_camiseta" required>
+    <label>Nome do Aluno(a)</label>
+    <input type="text" name="entry.nome_aluno" required>
+
+    <label>CPF do Aluno(a)</label>
+    <input type="text" name="entry.cpf_aluno" required>
+
+    <label>Tamanho da camiseta</label>
+    <select name="entry.tamanho_camiseta" required>
       <option value="">Selecione</option>
       <option value="PP">PP</option>
       <option value="P">P</option>
@@ -293,13 +112,44 @@
       <option value="XG">XG</option>
     </select>
 
-    <label for="vencimento">Dia do Vencimento da Mensalidade:</label>
-    <select name="vencimento" id="vencimento" required>
+    <label>Horário das aulas</label>
+    <input type="text" name="entry.horario_aulas" required>
+
+    <label>Idade</label>
+    <input type="number" name="entry.idade" required>
+
+    <label>O Aluno tem mais de 18 anos?</label>
+    <select name="entry.maioridade" required>
+      <option value="">Selecione</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+
+    <label>Unidade - Vila Matilde</label>
+    <input type="text" name="entry.unidade_vila_matilde">
+
+    <label>Complemento</label>
+    <input type="text" name="entry.complemento">
+
+    <label>Email do responsável</label>
+    <input type="email" name="entry.email_responsavel">
+
+    <label>RG do responsável</label>
+    <input type="text" name="entry.rg_responsavel">
+
+    <label>Data de nascimento do responsável</label>
+    <input type="date" name="entry.nasc_responsavel">
+
+    <label>Dia de vencimento da mensalidade</label>
+    <select name="entry.vencimento" required>
       <option value="">Selecione</option>
       <option value="10">10</option>
       <option value="20">20</option>
       <option value="30">30</option>
     </select>
+
+    <label>Unidade - Tatuapé</label>
+    <input type="text" name="entry.unidade_tatuape">
 
     <button type="submit">Concluir Matrícula</button>
   </form>
